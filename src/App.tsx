@@ -1,26 +1,26 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import LifecycleLogger from './components/LifecycleLogger';
+import RegistrationForm from './components/RegistrationForm';
+import { ThemeProvider } from './components/ThemeContext';
+import withLogging from './components/withLogging';
+import NameList from './components/NameList';
 
-function App() {
+const App: React.FC = () => {
+  const names = ['Alice', 'Bob', 'Charlie'];
+
+  // Example usage of HOC
+  const LoggedRegistrationForm = withLogging(RegistrationForm);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <ThemeProvider>
+      <h1>Name List</h1>
+      <NameList names={names} />
+      <h1>Lifecycle Logger</h1>
+      <LifecycleLogger />
+      <h1>Registration Form</h1>
+      <LoggedRegistrationForm />
+    </ThemeProvider>
   );
-}
+};
 
 export default App;
